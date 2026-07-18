@@ -7,7 +7,7 @@ function Contact(){
       <div className="row g-5">
         <div className="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
           <div className="mb-4">
-            <h4 className="text-primary">Contact Us</h4>
+            <h4 className="text-primary">Contacgggt Us</h4>
             <h1 className="display-4 mb-4">Contact With Team Of Experts</h1>
             <p className="mb-4">
               The contact form is currently inactive. Get a functional and
