@@ -16,7 +16,7 @@ export default function Edittrainers(){
      const [Image, setImage] = useState('')
 
     const params = useParams()
-
+    
    function editTrainers(e) {
         e.preventDefault()
         try {

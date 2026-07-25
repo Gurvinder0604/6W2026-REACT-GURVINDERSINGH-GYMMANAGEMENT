@@ -14,7 +14,7 @@ import Addtrainers from "./components/Admin/trainer/Addtrainers";
 import { ToastContainer } from "react-toastify";
 import Edittrainers from "./components/Admin/trainer/Edittrainers";
 import Managemembership from "./components/Admin/membershipplan/Managemembership";
-import Addmembership from "./components/Admin/Membershipplan/Addmembership";
+import AddMembership from "./components/Admin/membershipplan/AddMembership";
 
 
 
@@ -40,7 +40,7 @@ function App(){
         <Route path="trainers/add" element={<Addtrainers/>}></Route>
         <Route path="trainers/edit/:id" element={<Edittrainers/>}></Route>
         <Route path="membershipplan" element={<Managemembership/>}></Route>
-        <Route path="membershipplan/add" element={<Addmembership/>}></Route>
+        <Route path="membershipplan/add" element={<AddMembership/>}></Route>
         
 
      </Route>
