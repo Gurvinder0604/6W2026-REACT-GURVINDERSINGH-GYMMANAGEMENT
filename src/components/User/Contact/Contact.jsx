@@ -26,7 +26,7 @@ function Contact(){
                 <div className="bg-white d-flex">
                   <i className="fas fa-map-marker-alt fa-2x text-primary me-2" />
                   <div>
-                    <h4>Address 2132</h4>
+                    <h4>Address</h4>
                     <p className="mb-0">123 street New York</p>
                   </div>
                 </div>
