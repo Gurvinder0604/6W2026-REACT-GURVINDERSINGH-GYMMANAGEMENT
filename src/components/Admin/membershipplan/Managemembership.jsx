@@ -15,18 +15,18 @@ export default function Managemembership() {
     const [loading, setLoading] = useState([])
 
 
-    async function fetchTrainer() {
+    async function fetchMembershipplan() {
         let res = await MembershipService.all()
-        console.log("Res", res)
+        console.log( res)
         setMembershipPlan(res)
     }
 
 
     useEffect(() => {
-        fetchTrainer();
+        fetchMembershipplan();
     }, [])
 
-    async function deleteTrainer(id) {
+    async function deletemembershipplan(id) {
         try {
 
             Swal.fire({
@@ -39,8 +39,8 @@ export default function Managemembership() {
                 confirmButtonText: "Yes, delete it!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    TrainerService.deletetrainer(id)
-                    fetchTrainer();
+                    MembershipService.deletemembershipplan(id)
+                    fetchMembershipplan();
                     Swal.fire({
                         title: "Deleted!",
                         text: "Your file has been deleted.",
@@ -54,7 +54,7 @@ export default function Managemembership() {
 
 
         } catch (err) {
-            toast.error("Error Deleting Trainer")
+            toast.error("Error Deleting Membershipplan")
             console.log("Error: ", err)
         }
     }

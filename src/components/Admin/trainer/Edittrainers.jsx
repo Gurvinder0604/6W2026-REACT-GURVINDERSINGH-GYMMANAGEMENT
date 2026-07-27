@@ -8,7 +8,7 @@ export default function Edittrainers(){
     const [trainerName, setTrainerName] = useState('')
     const nav=useNavigate()
    
-    const [Specialisation, setSpecialisation] = useState('')
+    const [Specialization, setSpecialzation] = useState('')
     const [Experience, setExperience] = useState('')   
     const [PhoneNo, setPhoneNo] = useState('')
     const [Email, setEmail] = useState('')
@@ -49,7 +49,7 @@ export default function Edittrainers(){
             console.log("Res: ", res);
             
             setTrainerName(res.name)
-            setSpecialsation(res.Specialisation)
+            setSpecialzation(res.Specialization)
             setExperience(res.Experience)
             setPhoneNo(res.phoneno)
             setEmail(res.email)
@@ -98,8 +98,8 @@ export default function Edittrainers(){
                         <input
                             type="text"
                             className="w-100 form-control border-0 py-3 mb-4"
-                            value={Specialsation}
-                            placeholder="Enter Specialsation" onChange={(e) => { setSpecialsation(e.target.value) }}
+                            value={Specialzation}
+                            placeholder="Enter Specialzation" onChange={(e) => { setSpecialzation(e.target.value) }}
                         />
                         <input
                             type="text"

@@ -6,7 +6,7 @@ import CloudinaryService from "../../../services/CloudinaryService";
 export default function Addtrainers() {
 
   const [trainerName, setTrainerName] = useState('');
-  const [specialsation, setSpecialisation] = useState('');
+  const [specialzation, setSpecialization] = useState('');
   const [experience, setExperience] = useState('');
   const [phoneno, setPhoneNo] = useState("")
   const [email, setEmail] = useState("")
@@ -27,7 +27,7 @@ export default function Addtrainers() {
     try {
       let payload = {
         name: trainerName,
-        specialsation: specialsation,
+        specialzation: specialzation,
         experience: experience,
         phoneno: phoneno,
         email: email,
@@ -91,7 +91,7 @@ export default function Addtrainers() {
                     className="form-control border-0"
                     id="specialzation"
                     placeholder="Your Specialzation"
-                    onChange={(e) => { setSpecialisation(e.target.value) }}
+                    onChange={(e) => { setSpecialization(e.target.value) }}
                   />
                   <label htmlFor="name">Your Specialzation</label>
                 </div>

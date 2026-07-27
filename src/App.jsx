@@ -15,6 +15,8 @@ import { ToastContainer } from "react-toastify";
 import Edittrainers from "./components/Admin/trainer/Edittrainers";
 import Managemembership from "./components/Admin/membershipplan/Managemembership";
 import AddMembership from "./components/Admin/membershipplan/AddMembership";
+// import { ToastContainer } from "react-toastify";
+import Editmembership from "./components/Admin/membershipplan/Editmembership";
 
 
 
@@ -41,6 +43,7 @@ function App(){
         <Route path="trainers/edit/:id" element={<Edittrainers/>}></Route>
         <Route path="membershipplan" element={<Managemembership/>}></Route>
         <Route path="membershipplan/add" element={<AddMembership/>}></Route>
+        <Route path="membershipplans/edit/:id" element={<AddMembership/>}></Route>
         
 
      </Route>

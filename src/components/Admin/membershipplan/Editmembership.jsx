@@ -1,4 +1,66 @@
+import { useEffect, useState } from "react"
+import MembershipService from "../../../services/MembershipService"
+import { toast } from "react-toastify"
+import { Navigate, useNavigate, useParams } from "react-router-dom"
+
 export default function Editmembership(){
+
+    const[planName, setPlanName]=useState('')
+    const nav=useNavigate()
+
+    // const [PlanName, setPlanName] = useState('')
+    const [Duration, setDuration] = useState('')
+    const [Price, setPrice] = useState('')
+    const [Description, setDescription] = useState('')
+
+    const useParams= useParams()
+
+
+    function Editmembership(e) {
+            e.preventDefault()
+            try {
+                let payload = {
+                    name: planName,
+                    duration:Duration,
+                    price:Price,
+                    description: Description,
+                   
+    
+                }
+    
+                MembershipService.update(payload,params.id)
+                
+    
+                toast.success("Trainers Added")
+                nav('/admin/membershipplan')
+            }catch(err){
+                console.log("Error: ", err)
+                toast.error("Error adding trainers")
+            }
+    
+        }
+         async function getMembershipplanDetails(){
+            let res = await MembershipService.single(params.id)
+            if(res){
+                console.log("Res: ", res);
+                
+                setPlanName(res.name)
+                setDuration(res.Duration)
+                setPrice(res.Price)
+                setPhoneNo(res.phoneno)
+                setDescription(res.description)
+                
+    
+            }else{
+                toast.error("No such Document")
+            }
+        }
+    
+        useEffect(()=>{
+            getMembershipplanDetails()
+        }, [])
+    
+
     return(
         <>
         
@@ -37,40 +99,24 @@ export default function Editmembership(){
                         <input
                             type="text"
                             className="w-100 form-control border-0 py-3 mb-4"
-                            value={Experience}
-                            placeholder="Enter Experience" onChange={(e) => { setExperience(e.target.value) }}
+                            value={Price}
+                            placeholder="Enter Experience" onChange={(e) => { setPrice(e.target.value) }}
                         />
                         <input
                             type="text"
                             className="w-100 form-control border-0 py-3 mb-4"
-                            value={PhoneNo}
-                            placeholder="Enter Phoneno" onChange={(e) => { setPhoneNo(e.target.value) }}
+                            value={Description}
+                            placeholder="Enter Phoneno" onChange={(e) => { setDescription(e.target.value) }}
                         />
-                        <input
-                            type="text"
-                            className="w-100 form-control border-0 py-3 mb-4"
-                            value={Email}
-                            placeholder="Enter Email" onChange={(e) => { setEmail(e.target.value) }}
-                        />
-                         <input
-                            type="text"
-                            className="w-100 form-control border-0 py-3 mb-4"
-                            value={Address}
-                            placeholder="Enter Address" onChange={(e) => { setAddress(e.target.value) }}
-                        />
+                        
+                        
+                       
                         
                         {/* <input
-                            type="text"
-                            className="w-100 form-control border-0 py-3 mb-4"
-                            value={Subject}
-                            placeholder="Enter Subject" onChange={(e) => { setSubject(e.target.value) }}
-                        /> */}
-                        
-                        <input
                             type="file"
                             className="w-100 form-control border-0 py-3 mb-4"
                             placeholder="Enter Image" onChange={(e) => { setImage(e.target.files[0]) }}
-                        />
+                        /> */}
                         
 
 
