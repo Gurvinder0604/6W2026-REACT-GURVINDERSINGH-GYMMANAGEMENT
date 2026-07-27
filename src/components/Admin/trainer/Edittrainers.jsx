@@ -81,6 +81,8 @@ export default function Edittrainers(){
                     </div>
                 </div>
             </div>
+
+            
             <div className="d-flex justify-content-center mt-5">
 
                 <div className="col-lg-7">
