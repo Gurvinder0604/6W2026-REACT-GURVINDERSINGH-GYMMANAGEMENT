@@ -153,7 +153,8 @@ export default function ManageTrainers() {
                                 <td>
                                     <div className="mt-4">
                                         {/* Uncomment the Link wrapper once your imports are ready */}
-                                    <Link to={`/admin/trainers/edit/${trainer.id}`}>
+                                    {/* <Link to={`/admin/trainers/edit/${trainer.id}`}> */}
+                                    <Link to="{`/admin/trainers/edit/${trainer.id}`}">
                                         <button className="btn btn-sm btn-outline-primary me-2" title="Edit">
                                             <i className="bi bi-pencil-square"></i>
                                         </button>
