@@ -6,7 +6,7 @@ import { Navigate, useNavigate, useParams } from "react-router-dom"
 export default function Edittrainers(){
 
     const [trainerName, setTrainerName] = useState('')
-    const nav=useNavigate()
+   
    
     const [Specialization, setSpecialzation] = useState('')
     const [Experience, setExperience] = useState('')   
@@ -16,6 +16,7 @@ export default function Edittrainers(){
      const [Image, setImage] = useState('')
 
     const params = useParams()
+     const nav=useNavigate()
     
    function editTrainers(e) {
         e.preventDefault()
@@ -33,7 +34,7 @@ export default function Edittrainers(){
             }
 
             TrainerService.update(payload,params.id)
-            
+            nav(-1)
 
             toast.success("Trainers Added")
             nav('/admin/trainers')
