@@ -95,7 +95,7 @@ function Header(){
                   Dashboard
                 </Link >
              <Link  to="/admin/trainers" className="nav-item nav-link">
-                  Members 
+                  Trainers 
                 </Link >
              <Link  to="/admin/membershipplan" className="nav-item nav-link">
                   Membership Plan

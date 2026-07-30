@@ -36,14 +36,13 @@ export default function Addtrainers() {
       }
 
       await TrainerService.add(payload)
-
-      toast.success("Trainer added")
       nav(-1)
-
-    }
+      toast.success("Trainer added")
+       }
     catch (err) {
-      console.log("Error:", err)
+      
       toast.error("Error adding trainer")
+      console.log("Error:", err)
     }
 
 
