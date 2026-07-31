@@ -151,36 +151,37 @@ export default function Editmembership() {
     const [duration, setDuration] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
+    const [loading, setLoading] = useState(false);
 
     const nav = useNavigate()
     const params = useParams()
 
     async function handleEditMembership(e) {
         e.preventDefault()
+        setLoading(true);
         try {
             let payload = {
-                name: planName,
+                planname: planName,
                 duration: duration,
                 price: price,
                 description: description,
             }
 
             await MembershipService.update(payload, params.id)
-
             toast.success("Membership plan updated successfully")
             nav('/admin/membershipplan')
         } catch (err) {
             console.log("Error: ", err)
             toast.error("Error updating membership plan")
         }
+        setLoading(false);
     }
 
     async function getMembershipplanDetails() {
         try {
             let res = await MembershipService.single(params.id)
             if (res) {
-                console.log("Res: ", res)
-                setPlanName(res.name || '')
+                setPlanName(res.planname || res.name || '')
                 setDuration(res.duration || res.Duration || '')
                 setPrice(res.price || res.Price || '')
                 setDescription(res.description || '')
@@ -200,61 +201,37 @@ export default function Editmembership() {
     }, [params.id])
 
     return (
-        <>
-            <div className="container">
-                <div className="d-flex justify-content-between my-4">
-                    <div>
-                        <h2>Manage Membership Plan</h2>
-                    </div>
-                    <div>
-                        <Link to="/admin/membershipPlan/add">
-                            <button className="btn btn-primary">Add Membership Plan</button>
-                        </Link>
+        <div className="container mt-5 mb-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card shadow">
+                        <div className="card-body">
+                            <h3 className="text-center mb-4 text-primary">Edit Membership Plan</h3>
+                            <form onSubmit={handleEditMembership}>
+                                <div className="mb-3">
+                                    <label>Plan Name</label>
+                                    <input type="text" className="form-control" value={planName} onChange={(e) => setPlanName(e.target.value)} required />
+                                </div>
+                                <div className="mb-3">
+                                    <label>Duration</label>
+                                    <input type="text" className="form-control" value={duration} onChange={(e) => setDuration(e.target.value)} required />
+                                </div>
+                                <div className="mb-3">
+                                    <label>Price</label>
+                                    <input type="number" className="form-control" value={price} onChange={(e) => setPrice(e.target.value)} required />
+                                </div>
+                                <div className="mb-4">
+                                    <label>Description</label>
+                                    <textarea className="form-control" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
+                                </div>
+                                <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+                                    {loading ? "Updating..." : "Update Plan"}
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div className="d-flex justify-content-center mt-5">
-                <div className="col-lg-7">
-                    <form onSubmit={handleEditMembership}>
-                        <input
-                            type="text"
-                            className="w-100 form-control border-0 py-3 mb-4"
-                            value={planName}
-                            placeholder="Enter Plan Name"
-                            onChange={(e) => setPlanName(e.target.value)}
-                        />
-                        <input
-                            type="text"
-                            className="w-100 form-control border-0 py-3 mb-4"
-                            value={duration}
-                            placeholder="Enter Duration"
-                            onChange={(e) => setDuration(e.target.value)}
-                        />
-                        <input
-                            type="text"
-                            className="w-100 form-control border-0 py-3 mb-4"
-                            value={price}
-                            placeholder="Enter Price"
-                            onChange={(e) => setPrice(e.target.value)}
-                        />
-                        <input
-                            type="text"
-                            className="w-100 form-control border-0 py-3 mb-4"
-                            value={description}
-                            placeholder="Enter Description"
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
-
-                        <button
-                            className="w-100 btn form-control border-secondary py-3 bg-white text-primary"
-                            type="submit"
-                        >
-                            Submit
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </>
+        </div>
     )
 }

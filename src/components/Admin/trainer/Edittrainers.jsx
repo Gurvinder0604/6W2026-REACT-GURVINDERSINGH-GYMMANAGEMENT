@@ -167,10 +167,9 @@ import { useEffect, useState } from "react";
 import TrainerService from "../../../services/TrainerService";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-
+import CloudinaryService from "../../../services/CloudinaryService";
 
 export default function Edittrainers() {
-
     const [trainerName, setTrainerName] = useState("");
     const [specialization, setSpecialization] = useState("");
     const [experience, setExperience] = useState("");
@@ -178,14 +177,21 @@ export default function Edittrainers() {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [image, setImage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const params = useParams();
     const navigate = useNavigate();
 
     async function editTrainers(e) {
         e.preventDefault();
-
+        setLoading(true);
         try {
+            let imageUrl = image;
+            // If the image is a file object (newly selected), upload it
+            if (typeof image === 'object') {
+                imageUrl = await CloudinaryService.upload(image);
+            }
+
             const payload = {
                 name: trainerName,
                 specialization: specialization,
@@ -193,29 +199,25 @@ export default function Edittrainers() {
                 phoneno: phoneNo,
                 email: email,
                 address: address,
-                image: image
+                image: imageUrl
             };
 
             await TrainerService.update(payload, params.id);
-
             toast.success("Trainer Updated Successfully");
             navigate("/admin/trainers");
-
         } catch (err) {
             console.log(err);
             toast.error("Error Updating Trainer");
         }
+        setLoading(false);
     }
 
     async function getTrainerDetails() {
         try {
             const res = await TrainerService.single(params.id);
-
-            console.log(res);
-
             if (res) {
                 setTrainerName(res.name);
-                setSpecialization(res.specialization);
+                setSpecialization(res.specialization || res.specialzation || "");
                 setExperience(res.experience);
                 setPhoneNo(res.phoneno);
                 setEmail(res.email);
@@ -224,7 +226,6 @@ export default function Edittrainers() {
             } else {
                 toast.error("Trainer Not Found");
             }
-
         } catch (err) {
             console.log(err);
         }
@@ -235,87 +236,49 @@ export default function Edittrainers() {
     }, []);
 
     return (
-        <>
-            <div className="container">
-
-                <div className="d-flex justify-content-between my-4">
-                    <h2>Edit Trainer</h2>
-                </div>
-
-                <div className="d-flex justify-content-center">
-
-                    <div className="col-lg-7">
-
-                        <form onSubmit={editTrainers}>
-
-                            <input
-                                type="text"
-                                className="form-control mb-3"
-                                placeholder="Trainer Name"
-                                value={trainerName}
-                                onChange={(e) => setTrainerName(e.target.value)}
-                            />
-
-                            <input
-                                type="text"
-                                className="form-control mb-3"
-                                placeholder="Specialization"
-                                value={specialization}
-                                onChange={(e) => setSpecialization(e.target.value)}
-                            />
-
-                            <input
-                                type="text"
-                                className="form-control mb-3"
-                                placeholder="Experience"
-                                value={experience}
-                                onChange={(e) => setExperience(e.target.value)}
-                            />
-
-                            <input
-                                type="text"
-                                className="form-control mb-3"
-                                placeholder="Phone Number"
-                                value={phoneNo}
-                                onChange={(e) => setPhoneNo(e.target.value)}
-                            />
-
-                            <input
-                                type="email"
-                                className="form-control mb-3"
-                                placeholder="Email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-
-                            <input
-                                type="text"
-                                className="form-control mb-3"
-                                placeholder="Address"
-                                value={address}
-                                onChange={(e) => setAddress(e.target.value)}
-                            />
-
-                            <input
-                                type="file"
-                                className="form-control mb-3"
-                                onChange={(e) => setImage(e.target.files[0])}
-                            />
-
-                            <button
-                                type="submit"
-                                className="btn btn-primary w-100"
-                            >
-                                Update Trainer
-                            </button>
-
-                        </form>
-
+        <div className="container mt-5 mb-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card shadow">
+                        <div className="card-body">
+                            <h3 className="text-center mb-4 text-primary">Edit Trainer</h3>
+                            <form onSubmit={editTrainers}>
+                                <div className="mb-3">
+                                    <label>Name</label>
+                                    <input type="text" className="form-control" value={trainerName} onChange={(e) => setTrainerName(e.target.value)} required />
+                                </div>
+                                <div className="mb-3">
+                                    <label>Specialization</label>
+                                    <input type="text" className="form-control" value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
+                                </div>
+                                <div className="mb-3">
+                                    <label>Experience</label>
+                                    <input type="text" className="form-control" value={experience} onChange={(e) => setExperience(e.target.value)} required />
+                                </div>
+                                <div className="mb-3">
+                                    <label>Phone Number</label>
+                                    <input type="text" className="form-control" value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)} required />
+                                </div>
+                                <div className="mb-3">
+                                    <label>Email</label>
+                                    <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                </div>
+                                <div className="mb-3">
+                                    <label>Address</label>
+                                    <input type="text" className="form-control" value={address} onChange={(e) => setAddress(e.target.value)} required />
+                                </div>
+                                <div className="mb-4">
+                                    <label>Profile Image (Leave blank to keep existing)</label>
+                                    <input type="file" className="form-control" onChange={(e) => setImage(e.target.files[0])} />
+                                </div>
+                                <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+                                    {loading ? "Updating..." : "Update Trainer"}
+                                </button>
+                            </form>
+                        </div>
                     </div>
-
                 </div>
-
             </div>
-        </>
+        </div>
     );
 }

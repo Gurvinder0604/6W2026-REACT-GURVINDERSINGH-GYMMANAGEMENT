@@ -1,4 +1,19 @@
+import { Link, useNavigate } from "react-router-dom";
+import AuthService from "../../services/AuthService";
+
 function UserHeader(){
+    const navigate = useNavigate();
+    const user = AuthService.getCurrentUser();
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            await AuthService.logoutUser();
+            navigate('/login');
+        } catch(error) {
+            console.error(error);
+        }
+    };
     return(
         <>
   {/* Navbar & Hero Start */}
@@ -44,14 +59,25 @@ function UserHeader(){
             <div className="col-lg-4 text-center text-lg-end">
               <div className="d-flex justify-content-end">
                 <div className="d-flex align-items-center small">
-                  <a href="#" className="login-btn text-body me-3 pe-3">
-                    {" "}
-                    <span>Login</span>
-                  </a>
-                  <a href="#" className="text-body me-3">
-                    {" "}
-                    Register
-                  </a>
+                  {!user ? (
+                    <>
+                      <Link to="/login" className="login-btn text-body me-3 pe-3">
+                        <span>Login</span>
+                      </Link>
+                      <Link to="/register" className="text-body me-3">
+                        Register
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/dashboard" className="text-body me-3 pe-3 border-end">
+                        Dashboard
+                      </Link>
+                      <Link to="#" onClick={handleLogout} className="login-btn text-body me-3">
+                        <span>Logout</span>
+                      </Link>
+                    </>
+                  )}
                 </div>
                 <div className="d-flex pe-3">
                   <a className="btn p-0 text-primary me-3" href="#">
@@ -89,40 +115,48 @@ function UserHeader(){
             </button>
             <div className="collapse navbar-collapse" id="navbarCollapse">
               <div className="navbar-nav mx-0 mx-lg-auto">
-                <a href="/" className="nav-item nav-link active">
-                  Home
-                </a>
-                <a href="/about" className="nav-item nav-link">
-                  About
-                </a>
-                <a href="/course" className="nav-item nav-link">
-                  Courses
-                </a>
-                <a href="blog.html" className="nav-item nav-link">
-                  Blogs
-                </a>
-                <div className="nav-item dropdown">
-                  <a href="#" className="nav-link" data-bs-toggle="dropdown">
-                    <span className="dropdown-toggle">Pages</span>
-                  </a>
-                  <div className="dropdown-menu">
-                    <a href="feature.html" className="dropdown-item">
-                      Our Features
-                    </a>
-                    <a href="team.html" className="dropdown-item">
-                      Our team
-                    </a>
-                    <a href="testimonial.html" className="dropdown-item">
-                      Testimonial
-                    </a>
-                    <a href="404.html" className="dropdown-item">
-                      404 Page
-                    </a>
-                  </div>
-                </div>
-                <a href="/contact" className="nav-item nav-link">
-                  Contact
-                </a>
+                {!user ? (
+                  <>
+                    <Link to="/" className="nav-item nav-link active">Home</Link>
+                    <Link to="/about" className="nav-item nav-link">About</Link>
+                    <Link to="/course" className="nav-item nav-link">Courses</Link>
+                    <a href="blog.html" className="nav-item nav-link">Blogs</a>
+                    <div className="nav-item dropdown">
+                      <a href="#" className="nav-link" data-bs-toggle="dropdown">
+                        <span className="dropdown-toggle">Pages</span>
+                      </a>
+                      <div className="dropdown-menu">
+                        <a href="feature.html" className="dropdown-item">Our Features</a>
+                        <a href="team.html" className="dropdown-item">Our team</a>
+                        <a href="testimonial.html" className="dropdown-item">Testimonial</a>
+                        <a href="404.html" className="dropdown-item">404 Page</a>
+                      </div>
+                    </div>
+                    <Link to="/contact" className="nav-item nav-link">Contact</Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/dashboard" className="nav-item nav-link active">Dashboard</Link>
+                    <Link to="/browse-memberships" className="nav-item nav-link">Memberships</Link>
+                    <Link to="/membership-details" className="nav-item nav-link">My Plan</Link>
+                    <Link to="/view-workouts" className="nav-item nav-link">Workouts</Link>
+                    <Link to="/view-diet-plans" className="nav-item nav-link">Diet Plans</Link>
+                    <Link to="/track-progress" className="nav-item nav-link">Progress</Link>
+                    <Link to="/manage-profile" className="nav-item nav-link">Profile</Link>
+                  </>
+                )}
+                
+                {/* Mobile Auth Links */}
+                {!user ? (
+                    <div className="d-lg-none mt-2">
+                        <Link to="/login" className="nav-item nav-link text-primary">Login</Link>
+                        <Link to="/register" className="nav-item nav-link text-primary">Register</Link>
+                    </div>
+                ) : (
+                    <div className="d-lg-none mt-2">
+                        <Link to="#" onClick={handleLogout} className="nav-item nav-link text-danger">Logout</Link>
+                    </div>
+                )}
                 <div className="nav-btn ps-3">
                   <button
                     className="btn-search btn btn-primary btn-md-square mt-2 mt-lg-0 mb-4 mb-lg-0 flex-shrink-0"

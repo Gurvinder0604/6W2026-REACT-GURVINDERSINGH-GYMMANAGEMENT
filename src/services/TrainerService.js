@@ -8,7 +8,7 @@ class TrainerService {
         let newTrainer = new TrainerModel();
 
         newTrainer.name = data.name;
-        newTrainer.specialization = data.specialzation;
+        newTrainer.specialization = data.specialization;
         newTrainer.experience = data.experience;
         newTrainer.phoneno = data.phoneno
         newTrainer.email = data.email

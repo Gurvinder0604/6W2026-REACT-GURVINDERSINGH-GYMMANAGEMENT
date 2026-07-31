@@ -212,23 +212,17 @@ export default function Managemembership() {
     }
 
     return (
-        <>
-            <div className="container">
-                <div className="d-flex justify-content-between my-4">
-                    <div>
-                        <h2>Manage Membership Plan</h2>
-                    </div>
-                    <div>
-                        <Link to="/admin/membershipPlan/add">
-                            <button className="btn btn-primary">Add Membership Plan</button>
-                        </Link>
-                    </div>
-                </div>
+        <div className="container mt-5 mb-5">
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                <h2>Manage Membership Plans</h2>
+                <Link to="/admin/membershipPlan/add">
+                    <button className="btn btn-primary">Add Membership Plan</button>
+                </Link>
             </div>
 
-            <div className="container">
-                <table className="table table-bordered">
-                    <thead className="table-danger text-black">
+            <div className="table-responsive">
+                <table className="table table-bordered table-striped table-hover align-middle">
+                    <thead className="table-dark">
                         <tr>
                             <th scope="col">Sr no.</th>
                             <th scope="col">Plan Name</th>
@@ -236,50 +230,35 @@ export default function Managemembership() {
                             <th scope="col">Price</th>
                             <th scope="col">Description</th>
                             <th scope="col">Status</th>
-                            <th scope="col">CreatedAt</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {membershipPlan.map((plan, index) => (
                             <tr key={plan.id || index}>
+                                <td>{index + 1}</td>
+                                <td>{plan.planname || plan.name}</td>
+                                <td>{plan.duration}</td>
+                                <td>₹{plan.price}</td>
+                                <td>{plan.description}</td>
                                 <td>
-                                    <p className="mb-0 mt-4">{index + 1}</p>
+                                    <span className={`badge ${plan.status ? 'bg-success' : 'bg-secondary'}`}>
+                                        {plan.status ? "Active" : "Inactive"}
+                                    </span>
                                 </td>
                                 <td>
-                                    <p className="mb-0 mt-4">{plan.planname || plan.name}</p>
-                                </td>
-                                <td>
-                                    <p className="mb-0 mt-4">{plan.duration}</p>
-                                </td>
-                                <td>
-                                    <p className="mb-0 mt-4">{plan.price}</p>
-                                </td>
-                                <td>
-                                    <p className="mb-0 mt-4">{plan.description}</p>
-                                </td>
-                                <td>
-                                    <p className="mb-0 mt-4">{plan.status ? "Active" : "Inactive"}</p>
-                                </td>
-                                <td>
-                                    <p className="mb-0 mt-4">
-                                        {plan.createdAt ? new Date(plan.createdAt).toLocaleDateString() : 'N/A'}
-                                    </p>
-                                </td>
-                                <td>
-                                    <div className="mt-4">
+                                    <div className="d-flex gap-2">
                                         <Link to={`/admin/membershipplans/edit/${plan.id}`}>
-                                            <button className="btn btn-sm btn-outline-primary me-2" title="Edit">
-                                                <i className="bi bi-pencil-square"></i>
+                                            <button className="btn btn-sm btn-outline-primary" title="Edit">
+                                                <i className="bi bi-pencil-square"></i> Edit
                                             </button>
                                         </Link>
-
                                         <button 
                                             onClick={() => deletemembershipplan(plan.id)} 
                                             className="btn btn-sm btn-outline-danger" 
                                             title="Delete"
                                         >
-                                            <i className="bi bi-trash"></i>
+                                            <i className="bi bi-trash"></i> Delete
                                         </button>
                                     </div>
                                 </td>
@@ -288,6 +267,6 @@ export default function Managemembership() {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     )
 }

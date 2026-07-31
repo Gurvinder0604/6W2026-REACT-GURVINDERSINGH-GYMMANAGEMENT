@@ -231,108 +231,71 @@ export default function ManageTrainers() {
     }
 
     return (
-        <>
-            <div className="container">
+        <div className="container mt-5 mb-5">
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                <h2>Manage Trainers</h2>
+                <Link to="/admin/trainers/add">
+                    <button className="btn btn-primary">
+                        Add Trainer
+                    </button>
+                </Link>
+            </div>
 
-                <div className="d-flex justify-content-between my-4">
-                    <div>
-                        <h2>Manage Trainers</h2>
-                    </div>
-
-                    <div>
-                        <Link to="/admin/trainers/add">
-                            <button className="btn btn-primary">
-                                Add Trainer
-                            </button>
-                        </Link>
-                    </div>
-                </div>
-
-                <table className="table table-bordered">
-
-                    <thead className="table-danger text-black">
+            <div className="table-responsive">
+                <table className="table table-bordered table-striped table-hover align-middle">
+                    <thead className="table-dark">
                         <tr>
                             <th>Sr No.</th>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Specialization</th>
                             <th>Experience</th>
                             <th>Phone No</th>
                             <th>Email</th>
-                            <th>Address</th>
-                            <th>Image</th>
                             <th>Status</th>
-                            <th>Created At</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-
                     <tbody>
-
-                        {trainer.map((trainer, index) => (
-
-                            <tr key={trainer.id || trainer._id || index}>
-
+                        {trainer.map((t, index) => (
+                            <tr key={t.id || t._id || index}>
                                 <td>{index + 1}</td>
-
-                                <td>{trainer.name}</td>
-
-                                <td>{trainer.specialization}</td>
-
-                                <td>{trainer.experience}</td>
-
-                                <td>{trainer.phoneno}</td>
-
-                                <td>{trainer.email}</td>
-
-                                <td>{trainer.address}</td>
-
                                 <td>
                                     <img
-                                        src={trainer.image}
+                                        src={t.image}
                                         alt="trainer"
                                         className="img-fluid rounded-circle"
-                                        style={{ width: "80px", height: "80px" }}
+                                        style={{ width: "50px", height: "50px", objectFit: "cover" }}
                                     />
                                 </td>
-
+                                <td>{t.name}</td>
+                                <td>{t.specialization}</td>
+                                <td>{t.experience}</td>
+                                <td>{t.phoneno}</td>
+                                <td>{t.email}</td>
                                 <td>
-                                    {trainer.status ? "Active" : "Inactive"}
+                                    <span className={`badge ${t.status ? 'bg-success' : 'bg-secondary'}`}>
+                                        {t.status ? "Active" : "Inactive"}
+                                    </span>
                                 </td>
-
                                 <td>
-                                    {new Date(trainer.createdAt).toLocaleDateString()}
-                                </td>
-
-                                <td>
-
-                                    <Link
-                                        to={`/admin/trainers/edit/${trainer.id || trainer._id}`}
-                                    >
-                                        <button
-                                            className="btn btn-outline-primary btn-sm me-2"
-                                        >
-                                            <i className="bi bi-pencil-square"></i>
+                                    <Link to={`/admin/trainers/edit/${t.id || t._id}`}>
+                                        <button className="btn btn-outline-primary btn-sm me-2">
+                                            <i className="bi bi-pencil-square"></i> Edit
                                         </button>
                                     </Link>
-
                                     <button
                                         className="btn btn-outline-danger btn-sm"
-                                        onClick={() => deleteTrainer(trainer.id || trainer._id)}
+                                        onClick={() => deleteTrainer(t.id || t._id)}
                                     >
-                                        <i className="bi bi-trash"></i>
+                                        <i className="bi bi-trash"></i> Delete
                                     </button>
-
                                 </td>
-
                             </tr>
-
                         ))}
-
                     </tbody>
-
                 </table>
-
             </div>
-        </>
+        </div>
     );
 }

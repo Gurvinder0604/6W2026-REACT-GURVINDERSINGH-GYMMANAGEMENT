@@ -1,25 +1,30 @@
-
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import UserHeader from "./UserHeader";
 import UserFooter from "./UserFooter";
-import Home from "./Home/Home";
-import Course from "./Course/Course";
-import About from "./About/About";
-import Contact from "./Contact/Contact";
-import Viewtrainer from "./viewtrainer/Viewtrainer";
-
 
 function UserLayout(){
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const publicPaths = ["/", "/about", "/course", "/contact", "/viewtrainer", "/login", "/register"];
+        const isPublicPath = publicPaths.includes(location.pathname);
+        
+        if (!isPublicPath) {
+            const userStr = localStorage.getItem("user");
+            const user = userStr ? JSON.parse(userStr) : null;
+            if (!user || user.userType !== "customer") {
+                navigate("/login");
+            }
+        }
+    }, [navigate, location.pathname]);
+
     return(
         <>
         <UserHeader></UserHeader>
-
         <Outlet></Outlet>
-    
-        
-
         <UserFooter></UserFooter>
-        
         </>
     )
 }

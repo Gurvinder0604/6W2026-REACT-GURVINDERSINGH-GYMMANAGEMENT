@@ -1,6 +1,18 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import AuthService from "../../../services/AuthService"
 
 function Header(){
+    const navigate = useNavigate();
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            await AuthService.logoutUser();
+            navigate('/login');
+        } catch(error) {
+            console.error(error);
+        }
+    };
     return(
         <>
         {/* Navbar & Hero Start */}
@@ -46,15 +58,11 @@ function Header(){
             <div className="col-lg-4 text-center text-lg-end">
               <div className="d-flex justify-content-end">
                 <div className="d-flex align-items-center small">
-                  <Link  to="#" className="login-btn text-body me-3 pe-3">
+                  <Link to="#" onClick={handleLogout} className="login-btn text-body me-3 pe-3">
                     {" "}
-                    <span>Login</span>
-                  </Link >
-               <Link  to="#" className="text-body me-3">
-                    {" "}
-                    Register
-                  </Link >
-             </div>
+                    <span>Logout</span>
+                  </Link>
+                </div>
                 <div className="d-flex pe-3">
                   <Link  clasName="btn p-0 text-primary me-3" href="#">
                     <i className="fab fa-facebook-f" />
@@ -100,31 +108,25 @@ function Header(){
              <Link  to="/admin/membershipplan" className="nav-item nav-link">
                   Membership Plan
                 </Link >
-             <Link  to="blog.html" className="nav-item nav-link">
-                  Blogs
+             <Link  to="/admin/members" className="nav-item nav-link">
+                  Members
                 </Link >
-             <div className="nav-item dropdown">
-                  <Link  to="#" className="nav-link" data-bs-toggle="dropdown">
-                    <span className="dropdown-toggle">Pages</span>
-                  </Link >
-               <div className="dropdown-menu">
-                    <Link  to="feature.html" className="dropdown-item">
-                      Our Features
-                    </Link >
-                 <Link  to="team.html" className="dropdown-item">
-                      Our team
-                    </Link >
-                 <Link  to="testimonial.html" className="dropdown-item">
-                      Testimonial
-                    </Link >
-                 <Link  to="404.html" className="dropdown-item">
-                      404 Page
-                    </Link >
-               </div>
-                </div>
+             <Link  to="/admin/workouts" className="nav-item nav-link">
+                  Workouts
+                </Link >
+             <Link  to="/admin/dietplans" className="nav-item nav-link">
+                  Diet Plans
+                </Link >
+           
                 <Link  to="/contact" className="nav-item nav-link">
                   Contact
                 </Link >
+                
+                {/* Mobile Auth Links */}
+                <div className="d-lg-none mt-2">
+                    <Link to="#" onClick={handleLogout} className="nav-item nav-link text-danger">Logout</Link>
+                </div>
+
              <div className="nav-btn ps-3">
                   <button
                     className="btn-search btn btn-primary btn-md-square mt-2 mt-lg-0 mb-4 mb-lg-0 flex-shrink-0"
