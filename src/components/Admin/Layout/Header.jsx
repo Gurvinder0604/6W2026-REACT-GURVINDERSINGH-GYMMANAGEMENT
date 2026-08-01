@@ -118,9 +118,7 @@ function Header(){
                   Diet Plans
                 </Link >
            
-                <Link  to="/contact" className="nav-item nav-link">
-                  Contact
-                </Link >
+                
                 
                 {/* Mobile Auth Links */}
                 <div className="d-lg-none mt-2">

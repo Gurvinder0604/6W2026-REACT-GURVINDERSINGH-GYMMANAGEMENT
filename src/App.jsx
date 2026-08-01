@@ -14,7 +14,7 @@ import Addtrainers from "./components/Admin/trainer/Addtrainers";
 import { ToastContainer } from "react-toastify";
 import Edittrainers from "./components/Admin/trainer/Edittrainers";
 import Managemembership from "./components/Admin/membershipplan/Managemembership";
-import AddMembership from "./components/Admin/membershipplan/AddMembership";
+import AddMembership from "./components/Admin/membershipplan/Addmembership";
 // import { ToastContainer } from "react-toastify";
 import Editmembership from "./components/Admin/membershipplan/Editmembership";
 

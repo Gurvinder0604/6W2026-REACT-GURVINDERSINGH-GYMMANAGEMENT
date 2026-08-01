@@ -18,12 +18,12 @@ export default function CustomerDashboard() {
                                 <>
                                     <p className="card-text mb-1 mt-2 fw-bold fs-5">{user.membershipName}</p>
                                     <p className="card-text small mb-4">Expires: {user.membershipEndDate}</p>
-                                    <Link to="/dashboard/memberships" className="btn btn-light btn-sm mt-auto mx-auto" style={{ width: '150px' }}>View Plan</Link>
+                                    <Link to="/memberships" className="btn btn-light btn-sm mt-auto mx-auto" style={{ width: '150px' }}>View Plan</Link>
                                 </>
                             ) : (
                                 <>
                                     <p className="card-text mb-4 mt-2 fs-5">No Active Plan</p>
-                                    <Link to="/dashboard/browse-memberships" className="btn btn-light btn-sm mt-auto mx-auto" style={{ width: '150px' }}>Purchase Plan</Link>
+                                    <Link to="/browse-memberships" className="btn btn-light btn-sm mt-auto mx-auto" style={{ width: '150px' }}>Purchase Plan</Link>
                                 </>
                             )}
                         </div>
@@ -35,7 +35,7 @@ export default function CustomerDashboard() {
                             <i className="bi bi-graph-up-arrow display-4 mb-2"></i>
                             <h4 className="card-title">Fitness Progress</h4>
                             <p className="card-text mb-4 mt-2">Track your weight and body measurements regularly to stay motivated.</p>
-                            <Link to="/dashboard/progress" className="btn btn-light btn-sm mt-auto mx-auto" style={{ width: '150px' }}>Track Progress</Link>
+                            <Link to="/track-progress" className="btn btn-light btn-sm mt-auto mx-auto" style={{ width: '150px' }}>Track Progress</Link>
                         </div>
                     </div>
                 </div>
@@ -46,8 +46,8 @@ export default function CustomerDashboard() {
                             <h4 className="card-title">Workouts & Diet</h4>
                             <p className="card-text mb-4 mt-2">Follow your recommended daily exercise and nutrition plans.</p>
                             <div className="d-flex justify-content-center gap-2 mt-auto">
-                                <Link to="/dashboard/workouts" className="btn btn-light btn-sm" style={{ width: '100px' }}>Workouts</Link>
-                                <Link to="/dashboard/diet-plans" className="btn btn-light btn-sm" style={{ width: '100px' }}>Diet Plans</Link>
+                                <Link to="/view-workouts" className="btn btn-light btn-sm" style={{ width: '100px' }}>Workouts</Link>
+                                <Link to="/view-diet-plans" className="btn btn-light btn-sm" style={{ width: '100px' }}>Diet Plans</Link>
                             </div>
                         </div>
                     </div>
