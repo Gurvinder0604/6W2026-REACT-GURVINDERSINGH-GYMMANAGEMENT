@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import AuthService from "../../../services/AuthService"
 
 function Header(){
@@ -99,24 +99,24 @@ function Header(){
             </button>
             <div className="collapse navbar-collapse" id="navbarCollapse">
               <div className="navbar-nav mx-0 mx-lg-auto">
-                <Link  to="/admin" className="nav-item nav-link active">
+                <NavLink  to="/ad n" className="nav-item nav-link">
                   Dashboard
-                </Link >
-             <Link  to="/admin/trainers" className="nav-item nav-link">
+                </NavLink >
+             <NavLink  to="/admin/trainers" className="nav-item nav-link">
                   Trainers 
-                </Link >
-             <Link  to="/admin/membershipplan" className="nav-item nav-link">
+                </NavLink >
+             <NavLink  to="/admin/membershipplan" className="nav-item nav-link">
                   Membership Plan
-                </Link >
-             <Link  to="/admin/members" className="nav-item nav-link">
+                </NavLink >
+             <NavLink  to="/admin/members" className="nav-item nav-link">
                   Members
-                </Link >
-             <Link  to="/admin/workouts" className="nav-item nav-link">
+                </NavLink >
+             <NavLink  to="/admin/workouts" className="nav-item nav-link">
                   Workouts
-                </Link >
-             <Link  to="/admin/dietplans" className="nav-item nav-link">
+                </NavLink >
+             <NavLink  to="/admin/dietplans" className="nav-item nav-link">
                   Diet Plans
-                </Link >
+                </NavLink >
            
                 
                 
