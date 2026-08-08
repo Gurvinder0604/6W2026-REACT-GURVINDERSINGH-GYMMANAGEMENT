@@ -66,7 +66,7 @@ function App(){
         <Route path="trainers/edit/:id" element={<Edittrainers/>}></Route>
         <Route path="membershipplan" element={<Managemembership/>}></Route>
         <Route path="membershipplan/add" element={<AddMembership/>}></Route>
-        <Route path="membershipplans/edit/:id" element={<AddMembership/>}></Route>
+        <Route path="membershipplans/edit/:id" element={<Editmembership/>}></Route>
         <Route path="members" element={<ManageMembers/>}></Route>
         <Route path="workouts" element={<ManageWorkouts/>}></Route>
         <Route path="dietplans" element={<ManageDietPlans/>}></Route>

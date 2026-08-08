@@ -41,7 +41,7 @@ export default function BrowseMemberships() {
         }
 
         const options = {
-            key: "rzp_test_YOUR_KEY_HERE", // User will add testing key here
+            key: "rzp_test_TNCMPdk1LJ4gff", // User will add testing key here
             amount: plan.price * 100, // Amount in paise
             currency: "INR",
             name: "Gym Management System",
