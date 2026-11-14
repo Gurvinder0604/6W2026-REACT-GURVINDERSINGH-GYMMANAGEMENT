@@ -60,7 +60,7 @@ function App(){
 
 
      <Route path="/admin"element={<Layout/>}>
-        <Route path="" element={<Dashboard/>}></Route>
+        <Route path="dashboard" element={<Dashboard/>}></Route>
         <Route path="trainers" element={<ManageTrainers/>}></Route>
         <Route path="trainers/add" element={<Addtrainers/>}></Route>
         <Route path="trainers/edit/:id" element={<Edittrainers/>}></Route>
