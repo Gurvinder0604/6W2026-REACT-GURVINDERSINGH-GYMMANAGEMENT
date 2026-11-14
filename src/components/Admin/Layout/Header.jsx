@@ -99,7 +99,7 @@ function Header(){
             </button>
             <div className="collapse navbar-collapse" id="navbarCollapse">
               <div className="navbar-nav mx-0 mx-lg-auto">
-                <NavLink  to="/admin" className="nav-item nav-link">
+                <NavLink  to="/admin/dashboard" className="nav-item nav-link">
                   Dashboard
                 </NavLink >
              <NavLink  to="/admin/trainers" className="nav-item nav-link">
